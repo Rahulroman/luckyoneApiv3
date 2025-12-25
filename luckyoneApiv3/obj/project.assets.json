@@ -8710,11 +8710,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3.csproj",
+      "projectUniqueName": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3.csproj",
       "projectName": "luckyoneApiv3",
-      "projectPath": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3.csproj",
+      "projectPath": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3.csproj",
       "packagesPath": "C:\\Users\\rahul\\.nuget\\packages\\",
-      "outputPath": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3\\obj\\",
+      "outputPath": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

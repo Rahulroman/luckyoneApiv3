@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "geaNsbWjnwI=",
+  "dgSpecHash": "yLZsrrm2f7s=",
   "success": true,
-  "projectFilePath": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3.csproj",
+  "projectFilePath": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rahul\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\rahul\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
