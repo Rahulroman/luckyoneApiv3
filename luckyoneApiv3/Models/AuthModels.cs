@@ -26,5 +26,22 @@ namespace luckyoneApiv3.Models
              public string Message { get; set; }
         }
 
+        public class ApiResponseLoginDto
+        {
+            public Boolean IsSuccess { get; set; }
+            public string Message { get; set; }
+            public string Token { get; set; }
+
+            public Users? User { get; set; }
+        }
+
+        public class LoginRequestDto
+        {
+            public string Username { get; set; } = string.Empty;
+            public string Password { get; set; } = string.Empty;
+        }
+
+
+
     }
 }

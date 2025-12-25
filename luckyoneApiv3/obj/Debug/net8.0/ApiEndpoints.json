@@ -1,8 +1,112 @@
 [
   {
     "ContainingType": "luckyoneApiv3.Controllers.AuthController",
+    "Method": "login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestDto",
+        "Type": "luckyoneApiv3.Models.AuthModels\u002BLoginRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.AuthController",
+    "Method": "register",
+    "RelativePath": "api/Auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvatarImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.ContestController",
+    "Method": "JoinContest",
+    "RelativePath": "api/Contest/CreateContest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "joinContest",
+        "Type": "luckyoneApiv3.Models.ContestModels\u002BCreateContest",
+        "IsRequired": true
+      },
+      {
+        "Name": "UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.ContestController",
+    "Method": "GetAllContests",
+    "RelativePath": "api/Contest/GetAllContests",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.UserController",
+    "Method": "GetUserByID",
+    "RelativePath": "api/User/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.UserController",
     "Method": "GetAllUserList",
-    "RelativePath": "api/Auth/GetAllUserList",
+    "RelativePath": "api/User/GetAllUserList",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -18,21 +122,5 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "luckyoneApiv3.Controllers.AuthController",
-    "Method": "register",
-    "RelativePath": "api/Auth/register",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "luckyoneApiv3.Models.AuthModels\u002BRegisterRequestDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   }
 ]

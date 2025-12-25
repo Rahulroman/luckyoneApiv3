@@ -22,24 +22,24 @@ namespace luckyoneApiv3.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("register")]
-
-        public async Task<IActionResult> register([FromBody] RegisterRequestDto request) 
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> register([FromForm] RegisterRequestDto request) 
         {
            var response = await _authService.Register(request);
-
             return Ok(response);
         }
 
 
-        [HttpGet]
-        [Route("GetAllUserList")]
-        public async Task<ActionResult<List<Users>>> GetAllUserList()
-        { 
-          var response = await _authService.GetAllUserList();
-
-            return Ok(response );
-
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> login([FromBody] LoginRequestDto requestDto) 
+        {
+            var response = await _authService.loginDto(requestDto);
+            return Ok(response);
         }
+
+
+     
 
     }
 }

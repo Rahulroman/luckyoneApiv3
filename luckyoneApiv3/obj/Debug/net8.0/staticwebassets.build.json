@@ -1,1 +1,20 @@
-{"Version":1,"Hash":"Gvm4pJ1O1R3h0zf0PCcPu6E3f6ZoZ08J/yeru6EUDnY=","Source":"luckyoneApiv3","BasePath":"_content/luckyoneApiv3","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "iCHv9I+KnKCadC1kpcreDlnZ1xlrSXP7jNvWxjx4E0U=",
+  "Source": "luckyoneApiv3",
+  "BasePath": "_content/luckyoneApiv3",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "luckyoneApiv3\\wwwroot",
+      "Source": "luckyoneApiv3",
+      "ContentRoot": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\",
+      "BasePath": "_content/luckyoneApiv3",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}

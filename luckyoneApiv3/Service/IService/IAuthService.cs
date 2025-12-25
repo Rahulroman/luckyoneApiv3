@@ -7,7 +7,7 @@ namespace luckyoneApiv3.Service.IService
     public interface IAuthService
     {
         Task<ApiResponseResgisterDto> Register(RegisterRequestDto request);
+        Task<ApiResponseLoginDto> loginDto(LoginRequestDto requestDto);
 
-        Task<List<Users>> GetAllUserList ();
     }
 }
