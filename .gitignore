@@ -1,11 +1,71 @@
-# Visual Studio
-.vs/
-*.suo
-*.user
-
-# Build results
+## Build results
 bin/
 obj/
+out/
 
-# Logs
+## User-specific files
+*.rsuser
+*.user
+*.userosscache
+*.suo
+
+## Visual Studio
+.vs/
+.vscode/
+*.code-workspace
+
+## Rider
+.idea/
+*.sln.iml
+
+## ASP.NET Core
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+## Logs
 *.log
+
+## OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+## Publish output
+publish/
+*.Publish.xml
+*.pubxml
+*.pubxml.user
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+## Test results
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+## Docker
+.dockerignore
+docker-compose.override.yml
+
+## Node / frontend (if used)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## Entity Framework
+Migrations/*_Snapshot.cs
+Migrations/*.Designer.cs
+
+## Backup & temp files
+*.bak
+*.tmp
+*.temp
+*.swp
