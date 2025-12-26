@@ -5,8 +5,7 @@ namespace luckyoneApiv3.Service.IService
 {
     public interface IContestService
     {
-        Task<Contests> JoinContest(CreateContest joinContest, string UserID);
-
+        Task<Contests> CreateContest(CreateContest joinContest);
         Task<List<Contests>> GetAllContests();
     }
 }

@@ -1,6 +1,10 @@
-﻿using luckyoneApiv3.Data;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using luckyoneApiv3.Data;
 using luckyoneApiv3.Entity;
+using luckyoneApiv3.Helper;
 using luckyoneApiv3.Service.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static luckyoneApiv3.Models.ContestModels;
@@ -11,14 +15,23 @@ namespace luckyoneApiv3.Service
     {
 
         private readonly ApplicationDbContext _context;
-        public ContestService(ApplicationDbContext context)
+        private readonly Jwt_Helper _jwt_Helper;
+       // Add IHttpContextAccessor
+        public ContestService(ApplicationDbContext context, Jwt_Helper jwt_Helper)
         {
             _context = context;
+            _jwt_Helper = jwt_Helper;
         }
 
 
-        public async Task<Contests> JoinContest(CreateContest joinContest, string UserID)
-        { 
+       
+        public async Task<Contests> CreateContest(CreateContest joinContest)
+        {
+
+            int userId = _jwt_Helper.GetUserIdToken();
+            string role = _jwt_Helper.GetRoleFromToken();
+
+
             var contest = await (from C in _context.Contests
                                  where C.Title == joinContest.Title
                                  select C
@@ -42,7 +55,7 @@ namespace luckyoneApiv3.Service
                     StartDate = DateTime.Parse(joinContest.StartDate),
                     EndDate = DateTime.Parse(joinContest.EndDate),
                     Status = "upcoming",
-                    CreatedBy = UserID,
+                    CreatedBy = (userId).ToString(),
                     CreatedAt = DateTime.UtcNow,
                     MinimumParticipants = joinContest.MinimumParticipants ?? 0
                 };

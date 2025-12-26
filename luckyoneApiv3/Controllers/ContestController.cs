@@ -1,6 +1,6 @@
 ﻿using luckyoneApiv3.Service.IService;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 using static luckyoneApiv3.Models.ContestModels;
 
@@ -18,11 +18,12 @@ namespace luckyoneApiv3.Controllers
             this.contestService = contestService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("CreateContest")]
-        public async Task<IActionResult> JoinContest([FromBody] CreateContest joinContest ,string UserId)
+        public async Task<IActionResult> CreateContest([FromBody] CreateContest joinContest)
         {
-            var result = await contestService.JoinContest(joinContest , UserId);
+            var result = await contestService.CreateContest(joinContest);
             return Ok(result);
         }
 

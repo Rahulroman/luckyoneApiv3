@@ -39,12 +39,21 @@ namespace luckyoneApiv3.Service
 
             if (request.AvatarImage != null)
             {
+
+
                 var folderPath = Path.Combine("wwwroot", "profiles");
 
                 if (!Directory.Exists(folderPath))
                     Directory.CreateDirectory(folderPath);
 
-                var fileName = Guid.NewGuid();
+                // Get file extension (.jpg, .png, etc.)
+                var extension = Path.GetExtension(request.AvatarImage.FileName);
+
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".webp" };
+                if (!allowedExtensions.Contains(extension.ToLower()))
+                    throw new Exception("Invalid image format");
+
+                var fileName = Guid.NewGuid().ToString() + extension;
 
                 var fullPath = Path.Combine(folderPath, fileName.ToString()+".jpg");
 

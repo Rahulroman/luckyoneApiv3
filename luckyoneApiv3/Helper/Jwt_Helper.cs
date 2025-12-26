@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 
 
 namespace luckyoneApiv3.Helper
@@ -11,10 +12,12 @@ namespace luckyoneApiv3.Helper
     {
 
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public Jwt_Helper(IConfiguration configuration)
+        public Jwt_Helper(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -42,5 +45,20 @@ namespace luckyoneApiv3.Helper
 
 
         }
+
+        public int GetUserIdToken() 
+        {
+            var userId = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return int.Parse(userId);
+        }
+
+        public string GetRoleFromToken() 
+        {
+            var role = _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Role);
+            return role;
+        }
+
+
+
     }
 }

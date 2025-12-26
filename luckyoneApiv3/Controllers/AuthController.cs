@@ -25,8 +25,19 @@ namespace luckyoneApiv3.Controllers
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> register([FromForm] RegisterRequestDto request) 
         {
-           var response = await _authService.Register(request);
-            return Ok(response);
+            try
+            {
+                var response = await _authService.Register(request);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponseResgisterDto
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                });
+            }
         }
 
 
@@ -34,10 +45,20 @@ namespace luckyoneApiv3.Controllers
         [Route("login")]
         public async Task<IActionResult> login([FromBody] LoginRequestDto requestDto) 
         {
-            var response = await _authService.loginDto(requestDto);
-            return Ok(response);
+            try
+            {
+                var response = await _authService.loginDto(requestDto);
+                return Ok(response);
+            }
+            catch (Exception  ex)
+            {
+                return BadRequest(new ApiResponseLoginDto {
+                    IsSuccess = false,
+                    Message = ex.Message
+                });
+            }
+           
         }
-
 
      
 

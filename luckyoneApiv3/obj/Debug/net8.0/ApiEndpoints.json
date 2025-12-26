@@ -68,11 +68,6 @@
         "Name": "joinContest",
         "Type": "luckyoneApiv3.Models.ContestModels\u002BCreateContest",
         "IsRequired": true
-      },
-      {
-        "Name": "UserId",
-        "Type": "System.String",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []

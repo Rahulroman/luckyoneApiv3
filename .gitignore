@@ -8,6 +8,7 @@ out/
 *.user
 *.userosscache
 *.suo
+* text=auto eol=lf
 
 ## Visual Studio
 .vs/
