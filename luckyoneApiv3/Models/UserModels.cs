@@ -21,7 +21,14 @@ namespace luckyoneApiv3.Models
             public DateTime UpdatedAt { get; set; }
         }
 
-
+        public class UpdateProfileRequest
+        {
+            public string? FirstName { get; set; }
+            public string? LastName { get; set; }
+            public string? Username { get; set; }
+            public string? Email { get; set; }
+            public IFormFile? Avatar { get; set; }
+        }
 
 
 

@@ -1,6 +1,7 @@
 ﻿using luckyoneApiv3.Entity;
 using luckyoneApiv3.Helper;
 using luckyoneApiv3.Service.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static luckyoneApiv3.Models.UserModels;
@@ -37,31 +38,83 @@ namespace luckyoneApiv3.Controllers
                 var response = await _userService.GetUserById(UserId);
                 return Ok(new ApiResponse<UserDto>
                 {
-                    Success = true,
-                    Message = "User profile retrieved successfully.",
-                    Data = response
+                    success = true,
+                    message = "User profile retrieved successfully.",
+                    data = response
                 });
             }
             catch (Exception ex)
             {
                 return BadRequest(new ApiResponse
                 {
-                    Success = false,
-                    Message = ex.Message,
+                    success = false,
+                    message = ex.Message,
                 });
-               
             }
+        }
 
+        [HttpPost]
+        [Route("updateProfile")]
+        public async Task<ActionResult<ApiResponse<UserDto>>> UpdateProfile(UpdateProfileRequest request)
+        {
+            try
+            {
+                var userId = _jwt_Helper.GetUserIdToken();
 
+                if (userId <= 0)
+                {
+                    return Unauthorized(new ApiResponse
+                    {
+                        success = false,
+                        message = "Invalid User ID in token.",
+                    });
+                }
 
+                var result = await _userService.UpdateUserProfile(request , userId);
 
+                return Ok(new ApiResponse<UserDto>
+                {
+                    success = true,
+                    message = "Profile updated successfully.",
+                    data= result
+                });
 
+            }
+            catch (Exception)
+            {
+                return BadRequest(new ApiResponse
+                {
+                    success = false,
+                    message = "An error occurred while updating the profile.",
+                 });
+            }
+           
         }
 
 
-
-
-
+        [HttpGet]
+        [Route("GetAllUsers")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ApiResponse<PaginatedResponse<UserDto>>>> GetAllUsers(int page, int limit, string? search)
+        {
+            try
+            {
+                 var result = await _userService.GetAllUsers(page, limit, search);
+                return Ok(new ApiResponse<PaginatedResponse<UserDto>> 
+                { 
+                    success = true,
+                    message = "Users retrieved successfully.",
+                    data = result
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse {
+                    success = false,
+                    message = ex.Message,
+                });
+            }
+        }
 
 
 

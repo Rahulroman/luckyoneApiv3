@@ -141,37 +141,90 @@
         }
       }
     },
-    "/api/User/GetAllUserList": {
+    "/api/User/profile": {
       "get": {
         "tags": [
           "User"
         ],
         "responses": {
           "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/updateProfile": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "FirstName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "LastName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Username",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Avatar": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Users"
-                  }
+                  "$ref": "#/components/schemas/UserDtoApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Users"
-                  }
+                  "$ref": "#/components/schemas/UserDtoApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Users"
-                  }
+                  "$ref": "#/components/schemas/UserDtoApiResponse"
                 }
               }
             }
@@ -179,25 +232,56 @@
         }
       }
     },
-    "/api/User/{id}": {
+    "/api/User/GetAllUsers": {
       "get": {
         "tags": [
           "User"
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
+            "name": "page",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDtoPaginatedResponseApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDtoPaginatedResponseApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDtoPaginatedResponseApiResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -268,21 +352,16 @@
         },
         "additionalProperties": false
       },
-      "Users": {
-        "required": [
-          "passwordHash",
-          "username"
-        ],
+      "UserDto": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "username": {
-            "maxLength": 100,
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "email": {
             "type": "string",
@@ -296,14 +375,14 @@
             "type": "string",
             "nullable": true
           },
-          "avatarUrl": {
+          "avatar": {
             "type": "string",
+            "format": "binary",
             "nullable": true
           },
           "points": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "type": "number",
+            "format": "double"
           },
           "role": {
             "type": "string",
@@ -312,6 +391,14 @@
           "isActive": {
             "type": "boolean"
           },
+          "bio": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -319,27 +406,79 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
           },
-          "passwordHash": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "refreshToken": {
+          "message": {
             "type": "string",
             "nullable": true
           },
-          "refreshTokenExpiry": {
+          "timestamp": {
             "type": "string",
-            "format": "date-time",
+            "format": "date-time"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserDtoPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserDto"
+            },
             "nullable": true
           },
-          "emailVerified": {
-            "type": "boolean",
+          "total": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
-          "verificationToken": {
+          "page": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserDtoPaginatedResponseApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
             "type": "string",
             "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserDtoPaginatedResponse"
           }
         },
         "additionalProperties": false
