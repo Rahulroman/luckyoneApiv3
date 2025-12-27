@@ -1,4 +1,5 @@
-﻿using luckyoneApiv3.Service.IService;
+﻿using luckyoneApiv3.Helper;
+using luckyoneApiv3.Service.IService;
 using Microsoft.AspNetCore.Authorization;
 
 using Microsoft.AspNetCore.Mvc;
@@ -12,29 +13,64 @@ namespace luckyoneApiv3.Controllers
     
     public class ContestController : ControllerBase
     {
-        private readonly IContestService contestService;
-        public ContestController(IContestService contestService)
+        private readonly IContestService _contestService;
+        private readonly Jwt_Helper _jwt_Helper;
+        public ContestController(IContestService contestService, Jwt_Helper jwt_Helper)
         {
-            this.contestService = contestService;
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        [Route("CreateContest")]
-        public async Task<IActionResult> CreateContest([FromBody] CreateContest joinContest)
-        {
-            var result = await contestService.CreateContest(joinContest);
-            return Ok(result);
+            _contestService = contestService;
+            _jwt_Helper = jwt_Helper;
         }
 
 
-        [HttpGet]
-        [Route("GetAllContests")]
-        public async Task<IActionResult> GetAllContests()
+        [HttpPost("CreateContest")]
+        [Authorize(Roles ="Admin")]
+        public async Task<ActionResult<ApiResponse<ContestDTO>>> CreateContest([FromBody] CreateContestRequest request)
         {
-            var result = await contestService.GetAllContests();
-            return Ok(result);
+            var UserId = _jwt_Helper.GetUserIdToken();
+
+            if (UserId <= 0)
+            {
+                return Unauthorized(new ApiResponse<ContestDTO>
+                {
+                    success = false,
+                    message = "You are Not Allowed to Create Contest.",
+                    data = null
+                });
+            }
+
+            try {
+                
+                var result = await _contestService.CreateContest(request , UserId);
+
+                return Ok(new ApiResponse<ContestDTO>
+                {
+                    success = true,
+                    message = "Contest Created Successfully.",
+                    data = result
+                });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse<ContestDTO>
+                {
+                    success = false,
+                    message = ex.Message,
+                    data = null
+                });
+            }
+
+
+
+
         }
+
+
+
+
+
+
+
 
     }
 }
