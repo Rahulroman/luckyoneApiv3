@@ -58,6 +58,68 @@
   },
   {
     "ContainingType": "luckyoneApiv3.Controllers.ContestController",
+    "Method": "GetContest",
+    "RelativePath": "api/Contest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "limit",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "luckyoneApiv3.Helper.ApiResponse\u00601[[luckyoneApiv3.Helper.PaginatedResponse\u00601[[luckyoneApiv3.Models.ContestModels\u002BContestDTO, luckyoneApiv3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], luckyoneApiv3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.ContestController",
+    "Method": "GetContestBYId",
+    "RelativePath": "api/Contest/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "luckyoneApiv3.Helper.ApiResponse\u00601[[luckyoneApiv3.Models.ContestModels\u002BContestDTO, luckyoneApiv3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.ContestController",
     "Method": "CreateContest",
     "RelativePath": "api/Contest/CreateContest",
     "HttpMethod": "POST",
@@ -65,22 +127,22 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "joinContest",
-        "Type": "luckyoneApiv3.Models.ContestModels\u002BCreateContest",
+        "Name": "request",
+        "Type": "luckyoneApiv3.Models.ContestModels\u002BCreateContestRequest",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "luckyoneApiv3.Controllers.ContestController",
-    "Method": "GetAllContests",
-    "RelativePath": "api/Contest/GetAllContests",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "luckyoneApiv3.Helper.ApiResponse\u00601[[luckyoneApiv3.Models.ContestModels\u002BContestDTO, luckyoneApiv3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "luckyoneApiv3.Controllers.UserController",

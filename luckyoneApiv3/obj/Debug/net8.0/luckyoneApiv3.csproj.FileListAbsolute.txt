@@ -285,3 +285,7 @@ D:\Project_V3\luckyoneApiv3\luckyoneApiv3\obj\Debug\net8.0\ref\luckyoneApiv3.dll
 D:\Project_V3\luckyoneApiv3\luckyoneApiv3\bin\Debug\net8.0\jose-jwt.dll
 D:\Project_V3\luckyoneApiv3\luckyoneApiv3\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Project_V3\luckyoneApiv3\luckyoneApiv3\bin\Debug\net8.0\luckyoneApiv3.staticwebassets.runtime.json
+D:\Project_V3\luckyoneApiv3\luckyoneApiv3\luckyoneApiv3\bin\Debug\net8.0\luckyoneApiv3.staticwebassets.runtime.json
+D:\Project_V3\luckyoneApiv3\luckyoneApiv3\luckyoneApiv3\bin\Debug\net8.0\jose-jwt.dll
+D:\Project_V3\luckyoneApiv3\luckyoneApiv3\luckyoneApiv3\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Project_V3\luckyoneApiv3\luckyoneApiv3\luckyoneApiv3\obj\Debug\net8.0\luckyoneApiv3.sourcelink.json

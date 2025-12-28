@@ -107,36 +107,134 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateContest"
+                "$ref": "#/components/schemas/CreateContestRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateContest"
+                "$ref": "#/components/schemas/CreateContestRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateContest"
+                "$ref": "#/components/schemas/CreateContestRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOApiResponse"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/api/Contest/GetAllContests": {
+    "/api/Contest/{id}": {
       "get": {
         "tags": [
           "Contest"
         ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Contest": {
+      "get": {
+        "tags": [
+          "Contest"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOPaginatedResponseApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOPaginatedResponseApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOPaginatedResponseApiResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -289,12 +387,11 @@
   },
   "components": {
     "schemas": {
-      "CreateContest": {
+      "ContestDTO": {
         "type": "object",
         "properties": {
-          "userID": {
-            "type": "integer",
-            "format": "int32",
+          "id": {
+            "type": "string",
             "nullable": true
           },
           "title": {
@@ -305,19 +402,17 @@
             "type": "string",
             "nullable": true
           },
-          "entryPoints": {
-            "type": "integer",
-            "format": "int32",
+          "bannerImage": {
+            "type": "string",
             "nullable": true
+          },
+          "entryPoints": {
+            "type": "number",
+            "format": "double"
           },
           "maxParticipants": {
             "type": "integer",
             "format": "int32"
-          },
-          "minimumParticipants": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           },
           "currentParticipants": {
             "type": "integer",
@@ -325,15 +420,164 @@
           },
           "startDate": {
             "type": "string",
-            "nullable": true
+            "format": "date-time"
           },
           "endDate": {
             "type": "string",
-            "nullable": true
+            "format": "date-time"
           },
           "status": {
             "type": "string",
             "nullable": true
+          },
+          "winnerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "winnerUsername": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdById": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdByUsername": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hasJoined": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContestDTOApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ContestDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContestDTOPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContestDTO"
+            },
+            "nullable": true
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContestDTOPaginatedResponseApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ContestDTOPaginatedResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateContestRequest": {
+        "required": [
+          "description",
+          "endDate",
+          "entryPoints",
+          "maxParticipants",
+          "startDate",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "bannerImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "entryPoints": {
+            "maximum": 1000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxParticipants": {
+            "maximum": 1000,
+            "minimum": 2,
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
