@@ -9,10 +9,10 @@ using static luckyoneApiv3.Models.ContestModels;
 
 namespace luckyoneApiv3.Controllers
 {
-   // [Authorize]
+    // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class ContestController : ControllerBase
     {
         private readonly IContestService _contestService;
@@ -25,7 +25,7 @@ namespace luckyoneApiv3.Controllers
 
 
         [HttpPost("CreateContest")]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse<ContestDTO>>> CreateContest([FromBody] CreateContestRequest request)
         {
             var UserId = _jwt_Helper.GetUserIdToken();
@@ -40,9 +40,10 @@ namespace luckyoneApiv3.Controllers
                 });
             }
 
-            try {
-                
-                var result = await _contestService.CreateContest(request , UserId);
+            try
+            {
+
+                var result = await _contestService.CreateContest(request, UserId);
 
                 return Ok(new ApiResponse<ContestDTO>
                 {
@@ -67,7 +68,7 @@ namespace luckyoneApiv3.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetContestBYId/{id}")]
         public async Task<ActionResult<ApiResponse<ContestDTO>>> GetContestBYId(string id)
         {
             try
@@ -75,9 +76,10 @@ namespace luckyoneApiv3.Controllers
                 var UserId = _jwt_Helper.GetUserIdToken();
                 string contestId = id;
 
-                var response = await _contestService.GetContestById( UserId.ToString() , contestId);
+                var response = await _contestService.GetContestById(UserId.ToString(), contestId);
 
-                return Ok(new ApiResponse<ContestDTO> { 
+                return Ok(new ApiResponse<ContestDTO>
+                {
                     success = true,
                     message = "Data Fetch Successfully",
                     data = response
@@ -85,15 +87,16 @@ namespace luckyoneApiv3.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new ApiResponse { 
-                       success = false,
-                       message = ex.Message,
+                return BadRequest(new ApiResponse
+                {
+                    success = false,
+                    message = ex.Message,
                 });
             }
         }
 
-        [HttpGet]
-        public async Task<ActionResult<ApiResponse<PaginatedResponse<ContestDTO>>>> GetContest([FromQuery]int page, [FromQuery] int limit, [FromQuery] string Status)
+        [HttpGet("GetContest")]
+        public async Task<ActionResult<ApiResponse<PaginatedResponse<ContestDTO>>>> GetContest([FromQuery] int page, [FromQuery] int limit, [FromQuery] string Status)
         {
             try
             {
@@ -118,16 +121,16 @@ namespace luckyoneApiv3.Controllers
 
         }
 
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ApiResponse<ContestDTO>>> UpdateContest([FromBody] UpdateContestRequest request , string contestID)
+        [HttpPut("UpdateContest/{id}")]
+       // [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ApiResponse<ContestDTO>>> UpdateContest([FromBody] UpdateContestRequest request, string id)
         {
 
             try
             {
                 int userId = _jwt_Helper.GetUserIdToken();
 
-                var response = await _contestService.UpdateContest(request, int.Parse(contestID));
+                var response = await _contestService.UpdateContest(request, int.Parse(id));
 
                 return Ok(new ApiResponse<ContestDTO>
                 {
@@ -145,7 +148,71 @@ namespace luckyoneApiv3.Controllers
                     message = ex.Message,
 
                 });
+            }
+
         }
 
+
+        [HttpDelete("DeleteContest/{id}")]
+        // [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ApiResponse>> DeleteContest(int id) 
+        {
+            try
+            {
+                var userID = _jwt_Helper.GetUserIdToken();
+
+                var response =await  _contestService.DeleteContest(id);
+
+                return Ok(new ApiResponse
+                {
+                    success = true,
+                    message = "Contest deleted successfully"
+                });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse {
+                    success= false,
+                    message = ex.Message
+                });
+            }
+        }
+
+
+        [HttpPost("JoinContest/{id}")]
+        public async Task<ActionResult<ApiResponse>> JoinContest(int id)
+        {
+            try
+            {
+                var userID = _jwt_Helper.GetUserIdToken();
+
+                var contest = await _contestService.JoinContest(id, userID);
+
+                return Ok(new ApiResponse
+                {
+                    success= true,
+                    message = $"Join contest with id {id}"
+
+                });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse
+                {
+                    success= false,
+                    message = ex.Message
+                });
+            }
+        }
+
+
+
+
+
+
+
     }
+
 }

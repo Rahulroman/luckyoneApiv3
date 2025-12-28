@@ -203,5 +203,76 @@ namespace luckyoneApiv3.Service
 
 
         }
+
+        public async Task<bool> DeleteContest(int contestID)
+        {
+            var contest = await (from c in _context.Contests
+                                 where  c.Id == contestID
+                                 select c).FirstOrDefaultAsync();
+
+            if (contest == null)
+            {
+                throw new Exception("Contest not found");
+            }
+            if (contest.Status != "upcoming")
+            {
+                throw new Exception("Can only delete upcoming contests with no participants");
+            }
+
+
+             _context.Contests.Remove(contest);
+            await _context.SaveChangesAsync();
+
+            return true;
+
+        }
+
+        public async Task<bool> JoinContest(int contestID, int userID)
+        {
+            var contest = await (from c in _context.Contests
+                                 join p in _context.ContestParticipants on c.Id equals p.ContestId
+                                 where c.Id == userID).FirstOrDefaultAsync();
+
+            if (contest == null) 
+            {
+                throw new Exception("contest Not Found");
+            }
+
+            // Check contest status
+            if (contest.Status != "active")
+            {
+                throw new Exception("Contest is not active");
+            }
+
+            // Check if user has enough points
+            var user = await _context.User.FindAsync(userID);
+            if (user == null || user.Points < contest.EntryPoints)
+            {
+                throw new Exception("Insufficient points");
+            }
+
+
+            // Deduct points
+           // await _pointsService.DeductPointsAsync(userID, contest.EntryPoints, $"Joined contest: {contest.Title}", contestID);
+
+            var participant = new ContestParticipants
+            {
+                ContestId = contestID,
+                UserId = userID,
+                PointsSpent = contest.EntryPoints,
+                JoinedAt = DateTime.UtcNow
+            };
+
+             _context.ContestParticipants.Add(participant);
+
+            contest.CurrentParticipants++;
+            contest.UpdatedAt = DateTime.UtcNow;
+
+            await   _context.SaveChangesAsync();
+
+            return true;
+
+
+        }
     }
 }

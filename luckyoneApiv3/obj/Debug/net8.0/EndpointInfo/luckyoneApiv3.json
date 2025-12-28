@@ -146,7 +146,7 @@
         }
       }
     },
-    "/api/Contest/{id}": {
+    "/api/Contest/GetContestBYId/{id}": {
       "get": {
         "tags": [
           "Contest"
@@ -185,7 +185,7 @@
         }
       }
     },
-    "/api/Contest": {
+    "/api/Contest/GetContest": {
       "get": {
         "tags": [
           "Contest"
@@ -232,6 +232,64 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ContestDTOPaginatedResponseApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Contest/UpdateContest/{id}": {
+      "put": {
+        "tags": [
+          "Contest"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateContestRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateContestRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateContestRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestDTOApiResponse"
                 }
               }
             }
@@ -590,6 +648,54 @@
             "nullable": true
           },
           "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateContestRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 200,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 2000,
+            "type": "string",
+            "nullable": true
+          },
+          "bannerImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "entryPoints": {
+            "maximum": 100000,
+            "minimum": 1,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "maxParticipants": {
+            "maximum": 1000,
+            "minimum": 2,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
             "type": "string",
             "nullable": true
           }

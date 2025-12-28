@@ -58,8 +58,34 @@
   },
   {
     "ContainingType": "luckyoneApiv3.Controllers.ContestController",
+    "Method": "CreateContest",
+    "RelativePath": "api/Contest/CreateContest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "luckyoneApiv3.Models.ContestModels\u002BCreateContestRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "luckyoneApiv3.Helper.ApiResponse\u00601[[luckyoneApiv3.Models.ContestModels\u002BContestDTO, luckyoneApiv3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.ContestController",
     "Method": "GetContest",
-    "RelativePath": "api/Contest",
+    "RelativePath": "api/Contest/GetContest",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -95,7 +121,7 @@
   {
     "ContainingType": "luckyoneApiv3.Controllers.ContestController",
     "Method": "GetContestBYId",
-    "RelativePath": "api/Contest/{id}",
+    "RelativePath": "api/Contest/GetContestBYId/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -120,15 +146,20 @@
   },
   {
     "ContainingType": "luckyoneApiv3.Controllers.ContestController",
-    "Method": "CreateContest",
-    "RelativePath": "api/Contest/CreateContest",
-    "HttpMethod": "POST",
+    "Method": "UpdateContest",
+    "RelativePath": "api/Contest/UpdateContest/{id}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "luckyoneApiv3.Models.ContestModels\u002BCreateContestRequest",
+        "Type": "luckyoneApiv3.Models.ContestModels\u002BUpdateContestRequest",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

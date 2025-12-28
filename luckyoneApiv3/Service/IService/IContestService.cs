@@ -10,6 +10,12 @@ namespace luckyoneApiv3.Service.IService
         Task<ContestDTO> GetContestById(string id , string contestID);
         Task<PaginatedResponse<ContestDTO>> GetContest(int page, int limit, string status, int userID);
         Task<ContestDTO> UpdateContest (UpdateContestRequest contestDTO , int contestID);
+        Task<bool> DeleteContest (int contestID);
+
+        Task<bool> JoinContest(int contestID , int userID);
+
+
+
 
     }
 }
