@@ -84,6 +84,32 @@
   },
   {
     "ContainingType": "luckyoneApiv3.Controllers.ContestController",
+    "Method": "DeleteContest",
+    "RelativePath": "api/Contest/DeleteContest/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "luckyoneApiv3.Helper.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.ContestController",
     "Method": "GetContest",
     "RelativePath": "api/Contest/GetContest",
     "HttpMethod": "GET",
@@ -146,6 +172,32 @@
   },
   {
     "ContainingType": "luckyoneApiv3.Controllers.ContestController",
+    "Method": "JoinContest",
+    "RelativePath": "api/Contest/JoinContest/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "luckyoneApiv3.Helper.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.ContestController",
     "Method": "UpdateContest",
     "RelativePath": "api/Contest/UpdateContest/{id}",
     "HttpMethod": "PUT",
@@ -166,6 +218,57 @@
     "ReturnTypes": [
       {
         "Type": "luckyoneApiv3.Helper.ApiResponse\u00601[[luckyoneApiv3.Models.ContestModels\u002BContestDTO, luckyoneApiv3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.PointsController",
+    "Method": "GetBalance",
+    "RelativePath": "api/Points/GetBalance",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "luckyoneApiv3.Helper.ApiResponse\u00601[[luckyoneApiv3.Models.PointsModel\u002BPointsBalanceDTO, luckyoneApiv3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "luckyoneApiv3.Controllers.PointsController",
+    "Method": "GetTransactions",
+    "RelativePath": "api/Points/GetTransactions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "limit",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "luckyoneApiv3.Helper.ApiResponse\u00601[[luckyoneApiv3.Helper.PaginatedResponse\u00601[[luckyoneApiv3.Models.PointsModel\u002BPointsTransactionDTO, luckyoneApiv3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], luckyoneApiv3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

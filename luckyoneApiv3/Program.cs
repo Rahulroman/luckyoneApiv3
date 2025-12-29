@@ -30,7 +30,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IContestService, ContestService>();
+builder.Services.AddScoped<IPointsService, PointsService>();
 builder.Services.AddScoped<Jwt_Helper>();
+
 
 
 

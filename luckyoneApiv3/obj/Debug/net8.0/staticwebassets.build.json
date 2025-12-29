@@ -1,1 +1,125 @@
-{"Version":1,"Hash":"mrIDyZY2h2yj4nMg+10pxm42IkYrK37797CW5las3BQ=","Source":"luckyoneApiv3","BasePath":"_content/luckyoneApiv3","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[{"Name":"luckyoneApiv3\\wwwroot","Source":"luckyoneApiv3","ContentRoot":"D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\","BasePath":"_content/luckyoneApiv3","Pattern":"**"}],"Assets":[{"Identity":"D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\profiles\\b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg","SourceId":"luckyoneApiv3","SourceType":"Discovered","ContentRoot":"D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\","BasePath":"_content/luckyoneApiv3","RelativePath":"profiles/b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg#[.{fingerprint}]?.jpg","AssetKind":"All","AssetMode":"All","AssetRole":"Primary","AssetMergeBehavior":"","AssetMergeSource":"","RelatedAsset":"","AssetTraitName":"","AssetTraitValue":"","Fingerprint":"za124xj5ki","Integrity":"G4uIxNc2J9AISEF3BKF+d9LQGfd4BxOz5bT3d7NIAPE=","CopyToOutputDirectory":"Never","CopyToPublishDirectory":"PreserveNewest","OriginalItemSpec":"wwwroot\\profiles\\b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg","FileLength":208876,"LastWriteTime":"2025-12-28T07:45:45+00:00"}],"Endpoints":[{"Route":"profiles/b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg","AssetFile":"D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\profiles\\b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg","Selectors":[],"ResponseHeaders":[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Content-Length","Value":"208876"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\"G4uIxNc2J9AISEF3BKF+d9LQGfd4BxOz5bT3d7NIAPE=\""},{"Name":"Last-Modified","Value":"Sun, 28 Dec 2025 07:45:45 GMT"},{"Name":"Cache-Control","Value":"no-cache"}],"EndpointProperties":[{"Name":"integrity","Value":"sha256-G4uIxNc2J9AISEF3BKF+d9LQGfd4BxOz5bT3d7NIAPE="}]},{"Route":"profiles/b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.za124xj5ki.jpg","AssetFile":"D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\profiles\\b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg","Selectors":[],"ResponseHeaders":[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Content-Length","Value":"208876"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\"G4uIxNc2J9AISEF3BKF+d9LQGfd4BxOz5bT3d7NIAPE=\""},{"Name":"Last-Modified","Value":"Sun, 28 Dec 2025 07:45:45 GMT"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"}],"EndpointProperties":[{"Name":"fingerprint","Value":"za124xj5ki"},{"Name":"label","Value":"profiles/b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg"},{"Name":"integrity","Value":"sha256-G4uIxNc2J9AISEF3BKF+d9LQGfd4BxOz5bT3d7NIAPE="}]}]}
+{
+  "Version": 1,
+  "Hash": "cL3roeqBObyv+mx7OLv7XZ7PznmBavyKeCbSDf4XVKY=",
+  "Source": "luckyoneApiv3",
+  "BasePath": "_content/luckyoneApiv3",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "luckyoneApiv3\\wwwroot",
+      "Source": "luckyoneApiv3",
+      "ContentRoot": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\",
+      "BasePath": "_content/luckyoneApiv3",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\profiles\\b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg",
+      "SourceId": "luckyoneApiv3",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\",
+      "BasePath": "_content/luckyoneApiv3",
+      "RelativePath": "profiles/b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "za124xj5ki",
+      "Integrity": "G4uIxNc2J9AISEF3BKF+d9LQGfd4BxOz5bT3d7NIAPE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profiles\\b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "profiles/b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg",
+      "AssetFile": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\profiles\\b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "208876"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"G4uIxNc2J9AISEF3BKF+d9LQGfd4BxOz5bT3d7NIAPE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 26 Dec 2025 04:55:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-G4uIxNc2J9AISEF3BKF+d9LQGfd4BxOz5bT3d7NIAPE="
+        }
+      ]
+    },
+    {
+      "Route": "profiles/b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.za124xj5ki.jpg",
+      "AssetFile": "D:\\Project_V3\\luckyoneApiv3\\luckyoneApiv3\\wwwroot\\profiles\\b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "208876"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"G4uIxNc2J9AISEF3BKF+d9LQGfd4BxOz5bT3d7NIAPE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 26 Dec 2025 04:55:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "za124xj5ki"
+        },
+        {
+          "Name": "label",
+          "Value": "profiles/b69114c7-4bc9-4009-b69b-2f4e184db03b.jpg.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-G4uIxNc2J9AISEF3BKF+d9LQGfd4BxOz5bT3d7NIAPE="
+        }
+      ]
+    }
+  ]
+}
