@@ -17,12 +17,14 @@ namespace luckyoneApiv3.Service
     {
 
         private readonly ApplicationDbContext _context;
+        private readonly IPointsService _pointService;
         private readonly Jwt_Helper _jwt_Helper;
         // Add IHttpContextAccessor
-        public ContestService(ApplicationDbContext context, Jwt_Helper jwt_Helper)
+        public ContestService(ApplicationDbContext context, Jwt_Helper jwt_Helper, IPointsService pointService)
         {
             _context = context;
             _jwt_Helper = jwt_Helper;
+            _pointService = pointService;
         }
 
         public async Task<ContestDTO> CreateContest(CreateContestRequest request , int UserId)
@@ -254,7 +256,7 @@ namespace luckyoneApiv3.Service
 
 
             // Deduct points
-           // await _pointsService.DeductPointsAsync(userID, contest.EntryPoints, $"Joined contest: {contest.Title}", contestID);
+            await _pointService.DeductPoints(userID, contest.EntryPoints, contestID);
 
             var participant = new ContestParticipants
             {
@@ -274,6 +276,31 @@ namespace luckyoneApiv3.Service
             return true;
 
 
+        }
+
+        public async Task<List<ContestParticipantDTO>> GetContestParticipants(int contestID)
+        {
+            var contest = await (from p in _context.ContestParticipants
+                                 join u in _context.User on p.UserId equals u.Id
+                                 where p.ContestId == contestID 
+                                 orderby p.JoinedAt
+                                 select  new ContestParticipantDTO {
+                                     Id = p.Id.ToString(),
+                                     ContestId = p.ContestId.ToString(),
+                                     UserId = p.UserId.ToString(),
+                                     Username = u.Username,
+                                     Avatar = u.AvatarUrl,
+                                     PointsSpent = p.PointsSpent,
+                                     JoinedAt = p.JoinedAt
+                                 }).ToListAsync();
+
+            return contest;
+
+        }
+
+        public Task<ContestDTO> DeclareWinner(int contestID, int winnerID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

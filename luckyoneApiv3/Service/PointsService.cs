@@ -1,7 +1,6 @@
 ﻿using luckyoneApiv3.Data;
 using luckyoneApiv3.Entity;
 using luckyoneApiv3.Helper;
-using luckyoneApiv3.Models;
 using luckyoneApiv3.Service.IService;
 using Microsoft.EntityFrameworkCore;
 using static luckyoneApiv3.Models.PointsModel;
@@ -73,10 +72,12 @@ namespace luckyoneApiv3.Service
 
 
         public async Task<PointsTransactionDTO> AddPoints(int userID, AddPointsRequest request)
-        {
-            var query = _context.User.FindAsync(userID);
+        { 
+            var user = await (from u in _context.User
+                              where u.Id == userID
+                              select u).FirstOrDefaultAsync();
 
-            if (query == null)
+            if (user == null)
             {
                 throw new Exception("User not found");
             }
@@ -90,10 +91,25 @@ namespace luckyoneApiv3.Service
                 CreatedAt = DateTime.UtcNow
             };
 
-            await _context.PointTransactions.AddAsync(transaction);
+             _context.PointTransactions.Add(transaction);
+          
+            user.Points = (int)request.Amount;
+            user.UpdatedAt = DateTime.UtcNow;
+
+
             await _context.SaveChangesAsync();
 
-            return 
+            return new PointsTransactionDTO
+            {
+                Id = transaction.Id.ToString(),
+                UserId = transaction.UserId,
+                Amount = (decimal)transaction.Amount,
+                Type = transaction.Type,
+                ContestId = transaction.ContestId,
+                ContestTitle = transaction.Contest?.Title,
+                PaymentMethod = transaction.TransactionMethod,
+                CreatedAt = transaction.CreatedAt
+            };
 
 
 
@@ -101,7 +117,50 @@ namespace luckyoneApiv3.Service
 
         }
 
+        public async Task<bool> DeductPoints(int userID, int points, int contestID)
+        {
+            using var transaction  = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                var user = await _context.User.FindAsync(userID);
+
+                if (user == null)
+                {
+                    throw new Exception("User not found");
+                }
+                if (user.Points < points)
+                {
+                    throw new Exception("Insufficient points");
+                }
+
+                // Create debit transaction
+                var pointsTransaction = new PointsTransactions
+                {
+                    UserId = userID.ToString(),
+                    Amount = points,
+                    Type = "debit",
+                   // Description = des,
+                    ContestId = contestID.ToString(),
+                    CreatedAt = DateTime.UtcNow
+                };
 
 
+                _context.PointTransactions.Add(pointsTransaction);
+
+                user.Points -= points;
+                user.UpdatedAt = DateTime.UtcNow;
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return true;
+            }
+            catch 
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
     }
 }

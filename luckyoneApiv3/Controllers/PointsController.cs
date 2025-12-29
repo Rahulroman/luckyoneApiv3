@@ -71,7 +71,7 @@ namespace luckyoneApiv3.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<ActionResult<ApiResponse<PointsTransactionDTO>> AddPoints(AddPointsRequest request)
+        public async Task<ActionResult<ApiResponse<PointsTransactionDTO>>> AddPoints(AddPointsRequest request)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace luckyoneApiv3.Controllers
             }
         }
 
-
+        
 
 
 

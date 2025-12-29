@@ -7,7 +7,7 @@ namespace luckyoneApiv3.Service.IService
     {
         Task<PointsBalanceDTO> GetBalance(int userId);
         Task<PaginatedResponse<PointsTransactionDTO>> GetTransactions(int page , int limit , int userId);
-
         Task<PointsTransactionDTO> AddPoints(int userID, AddPointsRequest request);
+        Task<bool> DeductPoints(int userID, int points, int contestID);
     }
 }

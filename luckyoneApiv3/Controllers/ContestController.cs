@@ -208,8 +208,34 @@ namespace luckyoneApiv3.Controllers
         }
 
 
+        [HttpGet("participants/{contestID}")]
+        public async Task<ActionResult<ApiResponse<List<ContestParticipantDTO>>>> GetParticipants(int contestID)
+        {
+            try
+            {
+                var userID = _jwt_Helper.GetUserIdToken();
 
+                var result = await _contestService.GetContestParticipants(contestID );
 
+                return Ok(new ApiResponse<List<ContestParticipantDTO>>
+                {
+                    success = true,
+                    message = "Participants retrieved successfully",
+                    data = result
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse
+                {
+                    success = false,
+                    message = ex.Message
+                });
+            }
+        }
+
+        //[HttpPost("{id}/declare-winner")]
+        //[Authorize(Roles = "Admin")]
 
 
 

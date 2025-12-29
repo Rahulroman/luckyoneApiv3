@@ -72,5 +72,29 @@ namespace luckyoneApiv3.Models
             public string? Status { get; set; }
         }
 
+        public class ContestParticipantDTO
+        {
+            public string Id { get; set; }
+            public string ContestId { get; set; }
+            public string UserId { get; set; }
+            public string Username { get; set; }
+            public string? Avatar { get; set; }
+            public decimal PointsSpent { get; set; }
+            public DateTime JoinedAt { get; set; }
+            public int? Position { get; set; }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
