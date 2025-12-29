@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("luckyoneApiv3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a12ecd1d598b550ddcf4e91bf4c42c1bae50ab48")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00b34f4a31de3575d1324f47cfdf4cf11252f66f")]
 [assembly: System.Reflection.AssemblyProductAttribute("luckyoneApiv3")]
 [assembly: System.Reflection.AssemblyTitleAttribute("luckyoneApiv3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

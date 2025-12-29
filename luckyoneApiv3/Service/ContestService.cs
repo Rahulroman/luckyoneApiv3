@@ -231,7 +231,8 @@ namespace luckyoneApiv3.Service
         {
             var contest = await (from c in _context.Contests
                                  join p in _context.ContestParticipants on c.Id equals p.ContestId
-                                 where c.Id == userID).FirstOrDefaultAsync();
+                                 where c.Id == userID
+                                 select c).FirstOrDefaultAsync();
 
             if (contest == null) 
             {
