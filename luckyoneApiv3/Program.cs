@@ -3,6 +3,7 @@ using System.Text;
 using Jose;
 using luckyoneApiv3.Data;
 using luckyoneApiv3.Helper;
+using luckyoneApiv3.Middleware;
 using luckyoneApiv3.Service;
 using luckyoneApiv3.Service.IService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -125,5 +126,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.Run();

@@ -17,5 +17,8 @@ namespace luckyoneApiv3.Service.IService
         Task<List<ContestParticipantDTO>> GetContestParticipants(int contestID);
         Task<ContestDTO> DeclareWinner(int contestID , int winnerID);
 
+        Task<List<ContestDTO>> GetMyContests(int userID);
+
+        Task<PaginatedResponse<ContestDTO>> GetAdminContests(int page, int limit , int userID);
     }
 }

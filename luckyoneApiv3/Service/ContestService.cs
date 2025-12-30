@@ -8,6 +8,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using static luckyoneApiv3.Models.ContestModels;
+using static luckyoneApiv3.Models.PointsModel;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -298,9 +299,131 @@ namespace luckyoneApiv3.Service
 
         }
 
-        public Task<ContestDTO> DeclareWinner(int contestID, int winnerID)
+        public async Task<ContestDTO> DeclareWinner(int contestID, int winnerID)
         {
-            throw new NotImplementedException();
+            var contest = await (from c in _context.Contests
+                                 where c.Id == contestID
+                                 select c).FirstOrDefaultAsync();
+
+            if (contest == null)
+            {
+                throw new Exception("Contest not found");
+            }
+
+
+            if(contest.Status != "completed")
+            {
+                throw new Exception("Can only declare winner for completed contests");
+            }
+
+            var winnerParticipant = await (from p in _context.ContestParticipants
+                                           where p.ContestId == contestID && p.UserId == winnerID
+                                           select p).FirstOrDefaultAsync();
+
+            if (winnerParticipant == null)
+            {
+                throw new Exception("Winner must be a participant of the contest");
+            }
+
+            var prizePoints = (int)(contest.EntryPoints * contest.CurrentParticipants * 0.6); // 60% of total points
+
+            contest.WinnerId = winnerID.ToString();
+            contest.Status = "completed";
+            contest.UpdatedAt = DateTime.UtcNow;
+
+            await _pointService.AddPoints(winnerID, new AddPointsRequest { Amount = prizePoints, PaymentMethod = "contest_prize", TransactionId = $"CONTEST_{contestID}_WIN" });
+
+            var OtherParticipants = await (from p in _context.ContestParticipants
+                                           where p.UserId != winnerID
+                                           orderby p.JoinedAt
+                                           select p).ToListAsync();
+
+            await _context.SaveChangesAsync();
+
+            return new ContestDTO
+            {
+                Id = contest.Id.ToString(),
+                Title = contest.Title,
+                Description = contest.Description,
+                BannerImage = contest.BannerImage,
+                EntryPoints = contest.EntryPoints,
+                MaxParticipants = contest.MaxParticipants,
+                CurrentParticipants = contest.CurrentParticipants,
+                StartDate = contest.StartDate,
+                EndDate = contest.EndDate,
+                Status = contest.Status ?? string.Empty,
+                WinnerId = contest.WinnerId ?? string.Empty,
+                CreatedAt = contest.CreatedAt,
+                UpdatedAt = contest.UpdatedAt,
+            };
+
         }
+
+        public async Task<List<ContestDTO>> GetMyContests(int userID)
+        {
+           var contest = await (from c in _context.Contests
+                                where c.CreatedBy == userID.ToString()
+                                orderby c.CreatedAt descending
+                                select new ContestDTO
+                                {
+                                    Id = c.Id.ToString(),
+                                    Title = c.Title,
+                                    Description = c.Description,
+                                    BannerImage = c.BannerImage,
+                                    EntryPoints = c.EntryPoints,
+                                    MaxParticipants = c.MaxParticipants,
+                                    CurrentParticipants = c.CurrentParticipants,
+                                    StartDate = c.StartDate,
+                                    EndDate = c.EndDate,
+                                    Status = c.Status ?? string.Empty,
+                                    WinnerId = c.WinnerId ?? string.Empty,
+                                    CreatedAt = c.CreatedAt,
+                                    UpdatedAt = c.UpdatedAt,
+                                }).ToListAsync();
+
+            return contest;
+        }
+
+        public async Task<PaginatedResponse<ContestDTO>> GetAdminContests(int page, int limit, int userID)
+        {
+            var query = await (from c in _context.Contests
+                               where c.CreatedBy == userID.ToString()
+                               orderby c.CreatedAt descending
+                               select new ContestDTO
+                               {
+                                   Id = c.Id.ToString(),
+                                   Title = c.Title,
+                                   Description = c.Description,
+                                   BannerImage = c.BannerImage,
+                                   EntryPoints = c.EntryPoints,
+                                   MaxParticipants = c.MaxParticipants,
+                                   CurrentParticipants = c.CurrentParticipants,
+                                   StartDate = c.StartDate,
+                                   EndDate = c.EndDate,
+                                   Status = c.Status ?? string.Empty,
+                                   WinnerId = c.WinnerId ?? string.Empty,
+                                   CreatedAt = c.CreatedAt,
+                                   UpdatedAt = c.UpdatedAt,
+                               }).ToListAsync();
+
+
+            var contests = query.Skip((page - 1) * limit).Take(limit).ToList();
+
+            var total = contests.Count;
+
+            return new PaginatedResponse<ContestDTO>
+            {
+                total = total,
+                totalPages = (int)Math.Ceiling(total / (double)limit),
+                page = page,
+                limit = limit,
+                data = contests
+
+            };
+        }
+
+
+
+
     }
 }
