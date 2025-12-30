@@ -49,8 +49,8 @@ namespace luckyoneApiv3.Helper
         public int GetUserIdToken() 
         {
             var userId = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            // return int.Parse(userId);
-            return int.Parse("5");
+            return int.Parse(userId);
+            //return int.Parse("5");
 
         }
 
