@@ -99,17 +99,7 @@ namespace luckyoneApiv3.Service
 
             await _context.SaveChangesAsync();
 
-            return new PointsTransactionDTO
-            {
-                Id = transaction.Id.ToString(),
-                UserId = transaction.UserId,
-                Amount = (decimal)transaction.Amount,
-                Type = transaction.Type,
-                ContestId = transaction.ContestId,
-                ContestTitle = transaction.Contest?.Title,
-                PaymentMethod = transaction.TransactionMethod,
-                CreatedAt = transaction.CreatedAt
-            };
+            return 
 
 
 
